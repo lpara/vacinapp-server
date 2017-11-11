@@ -1,31 +1,20 @@
 package br.com.vacinapp.server.dominio;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
-public class Doenca {
+import org.hibernate.validator.constraints.NotEmpty;
 
-	@Id
-	@GeneratedValue
-	private Long id;
+@Entity
+public class Doenca extends EntidadeGenerica {
 	
+	@NotEmpty
 	private String nome;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_vacina")
 	private Vacina vacina;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;

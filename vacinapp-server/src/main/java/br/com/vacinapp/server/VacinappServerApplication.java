@@ -10,9 +10,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.vacinapp.server.dominio.Doenca;
 import br.com.vacinapp.server.dominio.Pessoa;
 import br.com.vacinapp.server.dominio.Usuario;
 import br.com.vacinapp.server.dominio.Vacina;
+import br.com.vacinapp.server.repository.DoencasRepository;
 import br.com.vacinapp.server.repository.PessoaRepository;
 import br.com.vacinapp.server.repository.UsuarioRepository;
 import br.com.vacinapp.server.repository.VacinaRepository;
@@ -27,63 +29,178 @@ public class VacinappServerApplication {
 	 //Somente para testar se a massa está sendo inserida no banco
 	
 	@Bean
-	public InitializingBean bean(UsuarioRepository usuarioRepo){	
+	public InitializingBean beanVacina(VacinaRepository vacinaRepo){	
 		return () -> {
-		//PessoaRepository pessoaRepo
-		//VacinaRepository vacinaRepo
-		//UsuarioRepository usuarioRepo
-		List<Vacina> vacinas = new ArrayList<Vacina>();
+			//PessoaRepository pessoaRepo
+			//VacinaRepository vacinaRepo
+			//UsuarioRepository usuarioRepo
+			List<Vacina> vacinas = new ArrayList<Vacina>();
+			
+			int conjuntoInsercao = 1;
+			
+			switch (conjuntoInsercao) {
+			case 1:
+				//Carregando Vacinas
+				Vacina vacinaUm = new Vacina();
+				vacinaUm.setNome("Antitetânica");
+				vacinaUm.setRenovavel(true);
+				vacinas.add(vacinaUm);
+				
+				Vacina vacinaDois = new Vacina();
+				vacinaDois.setNome("Febre Amarela");
+				vacinaDois.setRenovavel(false);
+				vacinas.add(vacinaDois);
+				
+				Vacina vacinaTres = new Vacina();
+				vacinaTres.setNome("Tríplice Viral");
+				vacinaTres.setRenovavel(false);
+				vacinas.add(vacinaTres);
+				
+				vacinaRepo.save(vacinas);
+				break;
+				
+			case 2:
+				Pessoa pessoaUm = new Pessoa();
+				pessoaUm.setNome("LP");
+				pessoaUm.setDataNascimento(new Date());
+				//pessoaRepo.save(pessoaUm);
+				break;
+				
+			case 3:
+				Usuario usuarioUm = new Usuario();
+				usuarioUm.setLogin("lpara2");
+				usuarioUm.setSenha("teste");
+				Pessoa p = new Pessoa();
+				p.setId(1L);
+				usuarioUm.setPessoa(p);
+				//usuarioRepo.save(usuarioUm);
+				
+				break;
+			
+			case 4:
+				List<Doenca> doencas = new ArrayList<Doenca>();
+				
+				Doenca doencaUm = new Doenca();
+				doencaUm.setNome("Tetano");
+				Vacina vacinaNovaUm = new Vacina();
+				vacinaNovaUm.setId(1L);
+				doencaUm.setVacina(vacinaNovaUm);
+				doencas.add(doencaUm);
+				
+				Doenca doencaDois = new Doenca();
+				doencaDois.setNome("Febre Amarela");
+				Vacina vacinaNovaDois = new Vacina();
+				vacinaNovaDois.setId(2L);
+				doencaDois.setVacina(vacinaNovaDois);
+				doencas.add(doencaDois);
+				
+				Doenca doencaTres = new Doenca();
+				doencaTres.setNome("Sarampo");
+				Vacina vacinaNovaTres = new Vacina();
+				vacinaNovaTres.setId(3L);
+				doencaTres.setVacina(vacinaNovaTres);
+				doencas.add(doencaTres);
+				
+				Doenca doencaQuatro = new Doenca();
+				doencaQuatro.setNome("Caxumba");
+				doencaQuatro.setVacina(vacinaNovaTres);
+				doencas.add(doencaQuatro);
+				
+				Doenca doencaCinco = new Doenca();
+				doencaCinco.setNome("Rubéola");
+				doencaCinco.setVacina(vacinaNovaTres);
+				doencas.add(doencaCinco);
+	
+			default:
+				break;
+			}
 		
-		int conjuntoInsercao = 3;
-		
-		switch (conjuntoInsercao) {
-		case 1:
-			//Carregando Vacinas
-			Vacina vacinaUm = new Vacina();
-			vacinaUm.setNome("Antitetânica");
-			vacinaUm.setRenovavel(true);
-			vacinas.add(vacinaUm);
+		};	
+	}
+	
+	@Bean
+	public InitializingBean beanPessoa (PessoaRepository pessoaRepo){	
+		return () -> {
+			List<Pessoa> pessoas = new ArrayList<Pessoa>();
 			
-			Vacina vacinaDois = new Vacina();
-			vacinaDois.setNome("Febre Amarela");
-			vacinaDois.setRenovavel(false);
-			vacinas.add(vacinaDois);
-			
-			Vacina vacinaTres = new Vacina();
-			vacinaTres.setNome("Tríplice Viral");
-			vacinaTres.setRenovavel(false);
-			vacinas.add(vacinaTres);
-			
-			//vacinaRepo.save(vacinas);
-			break;
-			
-		case 2:
 			Pessoa pessoaUm = new Pessoa();
 			pessoaUm.setNome("LP");
 			pessoaUm.setDataNascimento(new Date());
-			//pessoaRepo.save(pessoaUm);
-			break;
+			pessoas.add(pessoaUm);
 			
-		case 3:
+			Pessoa pessoaDois = new Pessoa();
+			pessoaDois.setNome("RenaPoli");
+			pessoaDois.setDataNascimento(new Date());
+			pessoas.add(pessoaDois);
+			
+			
+			pessoaRepo.save(pessoas);
+		};
+	}
+	
+	
+	@Bean
+	public InitializingBean beanUsuario (UsuarioRepository usuarioRepo){	
+		return () -> {
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			
 			Usuario usuarioUm = new Usuario();
-			usuarioUm.setLogin("lpara2");
+			usuarioUm.setLogin("lpara");
 			usuarioUm.setSenha("teste");
 			Pessoa p = new Pessoa();
 			p.setId(1L);
 			usuarioUm.setPessoa(p);
-			usuarioRepo.save(usuarioUm);
+			usuarios.add(usuarioUm);
 			
-			break;
-
-		default:
-			break;
-		}
-		
-		
-		//Carregando Pessoa
-		
-		};	
-		
+			Usuario usuarioDois = new Usuario();
+			usuarioDois.setLogin("rena");
+			usuarioDois.setSenha("teste");
+			Pessoa p2 = new Pessoa();
+			p2.setId(2L);
+			usuarioDois.setPessoa(p2);
+			usuarios.add(usuarioDois);
+			
+			usuarioRepo.save(usuarios);
+		};
 	}
-	
+
+	@Bean
+	public InitializingBean beanDoenca (DoencasRepository doencaRepo){	
+		return () -> {
+			List<Doenca> doencas = new ArrayList<Doenca>();
+			
+			Doenca doencaUm = new Doenca();
+			doencaUm.setNome("Tetano");
+			Vacina vacinaNovaUm = new Vacina();
+			vacinaNovaUm.setId(1L);
+			doencaUm.setVacina(vacinaNovaUm);
+			doencas.add(doencaUm);
+			
+			Doenca doencaDois = new Doenca();
+			doencaDois.setNome("Febre Amarela");
+			Vacina vacinaNovaDois = new Vacina();
+			vacinaNovaDois.setId(2L);
+			doencaDois.setVacina(vacinaNovaDois);
+			doencas.add(doencaDois);
+			
+			Doenca doencaTres = new Doenca();
+			doencaTres.setNome("Sarampo");
+			Vacina vacinaNovaTres = new Vacina();
+			vacinaNovaTres.setId(3L);
+			doencaTres.setVacina(vacinaNovaTres);
+			doencas.add(doencaTres);
+			
+			Doenca doencaQuatro = new Doenca();
+			doencaQuatro.setNome("Caxumba");
+			doencaQuatro.setVacina(vacinaNovaTres);
+			doencas.add(doencaQuatro);
+			
+			Doenca doencaCinco = new Doenca();
+			doencaCinco.setNome("Rubéola");
+			doencaCinco.setVacina(vacinaNovaTres);
+			doencas.add(doencaCinco);
+			
+			doencaRepo.save(doencas);
+		};
+	}
 }

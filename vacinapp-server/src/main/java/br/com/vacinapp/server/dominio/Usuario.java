@@ -1,32 +1,23 @@
 package br.com.vacinapp.server.dominio;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Usuario {
+public class Usuario extends EntidadeGenerica{
 	
-	@Id
-	@GeneratedValue
-	private Long id;
-	
+	@NotEmpty
 	private String login;
 	
+	@NotEmpty
 	private String senha;
 	
 	@OneToOne
+	@NotNull
 	private Pessoa pessoa;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getLogin() {
 		return login;

@@ -1,39 +1,28 @@
 package br.com.vacinapp.server.dominio;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
-public class Vacinacao {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
+public class Vacinacao extends EntidadeGenerica{
 	
 	@OneToOne
+	@NotNull
 	private Vacina vacina;
 	
 	@OneToOne
+	@NotNull
 	private Carteira carteira;
 	
 	private String lote;
 	
+	@NotNull
 	private Date dataVacinacao;
 	
 	private Date dataRenovacao;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Vacina getVacina() {
 		return vacina;

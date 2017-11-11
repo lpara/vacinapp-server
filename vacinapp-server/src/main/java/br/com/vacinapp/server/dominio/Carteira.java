@@ -1,33 +1,24 @@
 package br.com.vacinapp.server.dominio;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
-public class Carteira {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
+public class Carteira extends EntidadeGenerica{
 	
 	@ManyToOne
 	@JoinColumn(name = "gerenciador_carteira")
+	@NotNull
 	private Usuario gerenciadorCarteira;
 	
 	@OneToOne
+	@NotNull
 	private Pessoa donoCarteira;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Usuario getGerenciadorCarteira() {
 		return gerenciadorCarteira;
