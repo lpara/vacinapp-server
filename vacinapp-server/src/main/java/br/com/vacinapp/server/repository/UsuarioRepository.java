@@ -7,5 +7,7 @@ import br.com.vacinapp.server.dominio.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+	
+	public Usuario findUsuarioByLogin(String login);
 
 }

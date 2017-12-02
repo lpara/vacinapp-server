@@ -1,5 +1,7 @@
 package br.com.vacinapp.server.dominio;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -10,12 +12,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Usuario extends EntidadeGenerica{
 	
 	@NotEmpty
+	@Column(unique = true)
 	private String login;
 	
 	@NotEmpty
 	private String senha;
 	
-	@OneToOne
+	@OneToOne//(cascade = CascadeType.ALL, orphanRemoval = true)
 	@NotNull
 	private Pessoa pessoa;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import br.com.vacinapp.server.dominio.Vacina;
 
 @Repository
-public interface VacinaRepository extends JpaRepository<Vacina, Long> {
+public interface VacinaRepository extends JpaRepository<Vacina, Long>, VacinaRepositoryCustom {
 
 	public Vacina findVacinaByNome (@Param("nome") String nome);
 }

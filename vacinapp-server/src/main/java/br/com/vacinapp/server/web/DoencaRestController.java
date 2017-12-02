@@ -23,7 +23,7 @@ public class DoencaRestController {
 	@Autowired
 	private VacinaRepository vacinaRepo;
 	
-	@PostMapping
+	@PostMapping("/new")
 	public Doenca inserirDoenca(Doenca doenca){
 		return doencaRepo.save(doenca);
 	}
@@ -48,5 +48,12 @@ public class DoencaRestController {
 		Doenca doenca = doencaRepo.findOne(idDoenca);
 		return vacinaRepo.findOne(doenca.getVacina().getId());
 	}
+	
+	@GetMapping("/nome/like/{nome}")
+	public List<Doenca> buscarDoencasPorNome(@PathVariable("nome") String nomeDoencaLike){
+		return doencaRepo.buscarDoencasPorNomeLike(nomeDoencaLike);
+	}
+	
+	
 
 }

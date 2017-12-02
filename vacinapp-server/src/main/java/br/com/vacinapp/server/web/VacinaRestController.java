@@ -19,7 +19,7 @@ public class VacinaRestController {
 	@Autowired
 	private VacinaRepository vacinaRepo;
 	
-	@PostMapping
+	@PostMapping("/new")
 	public Vacina inserirVacina(Vacina vacina){
 		return vacinaRepo.save(vacina);
 	}
@@ -37,5 +37,10 @@ public class VacinaRestController {
 	@GetMapping("/nome/{nome}")
 	public Vacina buscarVacinaPorNome(@PathVariable("nome") String nomeVacina){
 		return vacinaRepo.findVacinaByNome(nomeVacina);
+	}
+	
+	@GetMapping("/nome/like/{nome}")
+	public List<Vacina> buscarVacinasPorNome(@PathVariable("nome") String nomeVacinaLike){
+		return vacinaRepo.buscaVacinaPorNomeLike(nomeVacinaLike);
 	}
 }

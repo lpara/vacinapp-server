@@ -10,10 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.vacinapp.server.dominio.Carteira;
 import br.com.vacinapp.server.dominio.Doenca;
 import br.com.vacinapp.server.dominio.Pessoa;
 import br.com.vacinapp.server.dominio.Usuario;
 import br.com.vacinapp.server.dominio.Vacina;
+import br.com.vacinapp.server.repository.CarteiraRepository;
 import br.com.vacinapp.server.repository.DoencasRepository;
 import br.com.vacinapp.server.repository.PessoaRepository;
 import br.com.vacinapp.server.repository.UsuarioRepository;
@@ -136,6 +138,22 @@ public class VacinappServerApplication {
 			doencas.add(doencaCinco);
 			
 			doencaRepo.save(doencas);
+		};
+	}
+	
+	@Bean
+	public InitializingBean beanCarteira (CarteiraRepository carteiraRepo){
+		return() -> {
+			Carteira carteira = new Carteira();
+			Usuario usuario1 = new Usuario();
+			usuario1.setId(1L);
+			Pessoa pessoa1 = new Pessoa();
+			pessoa1.setId(1L);
+			carteira.setGerenciadorCarteira(usuario1);
+			carteira.setDonoCarteira(pessoa1);
+			
+			carteiraRepo.save(carteira);
+			
 		};
 	}
 }

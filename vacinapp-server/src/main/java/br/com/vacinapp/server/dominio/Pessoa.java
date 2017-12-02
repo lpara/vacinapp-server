@@ -1,6 +1,8 @@
 package br.com.vacinapp.server.dominio;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -10,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Pessoa extends EntidadeGenerica{
 	
 	@NotEmpty
+	@Column(unique = true)
 	private String nome;
 	
 	@NotNull

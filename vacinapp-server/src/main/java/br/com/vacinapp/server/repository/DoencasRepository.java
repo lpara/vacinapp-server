@@ -8,9 +8,8 @@ import br.com.vacinapp.server.dominio.Doenca;
 import br.com.vacinapp.server.dominio.Vacina;
 
 @Repository
-public interface DoencasRepository extends JpaRepository<Doenca, Long> {
+public interface DoencasRepository extends JpaRepository<Doenca, Long>, DoencasRepositoryCustom {
 
 	public Doenca findDoencaByNome(@Param("nome") String nome);
 	
-	/*public Vacina findVacinaById(@Param("idDoenca") Long idDoenca);*/
 }
