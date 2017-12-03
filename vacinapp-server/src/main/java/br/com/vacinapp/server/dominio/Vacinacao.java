@@ -1,8 +1,11 @@
 package br.com.vacinapp.server.dominio;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 
@@ -19,10 +22,10 @@ public class Vacinacao extends EntidadeGenerica{
 	
 	private String lote;
 	
-	@NotNull
-	private Date dataVacinacao;
-	
 	private Date dataRenovacao;
+	
+	@Transient
+	private List<Dose> doses;
 
 	public Vacina getVacina() {
 		return vacina;
@@ -48,20 +51,20 @@ public class Vacinacao extends EntidadeGenerica{
 		this.lote = lote;
 	}
 
-	public Date getDataVacinacao() {
-		return dataVacinacao;
-	}
-
-	public void setDataVacinacao(Date dataVacinacao) {
-		this.dataVacinacao = dataVacinacao;
-	}
-
 	public Date getDataRenovacao() {
 		return dataRenovacao;
 	}
 
 	public void setDataRenovacao(Date dataRenovacao) {
 		this.dataRenovacao = dataRenovacao;
+	}
+
+	public List<Dose> getDoses() {
+		return doses;
+	}
+
+	public void setDoses(List<Dose> doses) {
+		this.doses = doses;
 	}
 
 }

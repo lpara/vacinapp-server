@@ -8,22 +8,20 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.vacinapp.server.dominio.Vacina;
+import br.com.vacinapp.server.dominio.Dose;
 
 @Repository
-public class VacinaRepositoryImpl implements VacinaRepositoryCustom {
+public class DoseRepositoryImpl implements DoseRepositoryCustom{
 
 	@PersistenceContext
 	EntityManager entityManager;
 	
-	public List<Vacina> buscaVacinaPorNomeLike(String nomeVacina){
+	public List<Dose> buscarDosesPorVacinacao(Long idVacinacao){
 		
-		String sql = "SELECT * FROM public.vacina WHERE nome LIKE ?";
+		String sql = "SELECT * FROM public.dose WHERE id_vacinacao = ?";
 		
-		nomeVacina = nomeVacina.toLowerCase();
-		nomeVacina = nomeVacina.substring(0, 1).toUpperCase() + nomeVacina.substring(1);
 		Query query = entityManager.createNativeQuery(sql);
-		query.setParameter(1, nomeVacina + "%");
+		query.setParameter(1, idVacinacao);
 		
 		return query.getResultList();
 	}
