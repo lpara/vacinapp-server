@@ -12,14 +12,17 @@ import org.springframework.context.annotation.Bean;
 
 import br.com.vacinapp.server.dominio.Carteira;
 import br.com.vacinapp.server.dominio.Doenca;
+import br.com.vacinapp.server.dominio.Dose;
 import br.com.vacinapp.server.dominio.Pessoa;
 import br.com.vacinapp.server.dominio.Usuario;
 import br.com.vacinapp.server.dominio.Vacina;
+import br.com.vacinapp.server.dominio.Vacinacao;
 import br.com.vacinapp.server.repository.CarteiraRepository;
 import br.com.vacinapp.server.repository.DoencasRepository;
 import br.com.vacinapp.server.repository.PessoaRepository;
 import br.com.vacinapp.server.repository.UsuarioRepository;
 import br.com.vacinapp.server.repository.VacinaRepository;
+import br.com.vacinapp.server.web.VacinacaoRestController;
 
 @SpringBootApplication
 public class VacinappServerApplication {
@@ -156,4 +159,30 @@ public class VacinappServerApplication {
 			
 		};
 	}
-}
+	
+	/*@Bean
+	public InitializingBean beanVacinacao (VacinacaoRestController vacinacaoController){
+		return() ->{
+			Vacinacao vacinacao = new Vacinacao();
+			Carteira carteira = new Carteira();
+			carteira.setId(1L);
+			vacinacao.setCarteira(carteira);
+			Vacina vacina = new Vacina();
+			vacina.setId(2L);
+			vacinacao.setVacina(vacina);
+			vacinacao.setLote("Teste");
+			Dose dose = new Dose();
+			dose.setNumeracao(1);
+			List<Dose> doses = new ArrayList<Dose>();
+			doses.add(dose);
+			vacinacao.setDoses(doses);
+			
+			vacinacaoController.inserirVacinacao(vacinacao);
+			
+			
+			
+		};
+	}*/
+		
+		
+	}

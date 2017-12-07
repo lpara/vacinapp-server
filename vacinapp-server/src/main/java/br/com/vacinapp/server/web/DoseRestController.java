@@ -21,8 +21,13 @@ public class DoseRestController {
 	private DoseRepository doseRepo;
 	
 	@PostMapping("/new")
-	public Dose inserirDose (Dose dose){
+	public Dose inserirDose(Dose dose){
 		return doseRepo.save(dose);
+	}
+	
+	@PostMapping("/new/many")
+	public List<Dose> inserirDosesBatch(List<Dose> doses){
+		return doseRepo.save(doses);
 	}
 	
 	@GetMapping

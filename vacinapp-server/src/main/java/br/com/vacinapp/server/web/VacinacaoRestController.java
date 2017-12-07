@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.vacinapp.server.dominio.Dose;
 import br.com.vacinapp.server.dominio.Vacinacao;
+import br.com.vacinapp.server.repository.DoseRepository;
 import br.com.vacinapp.server.repository.VacinacaoRepository;
 
 @RestController
@@ -18,10 +20,23 @@ public class VacinacaoRestController {
 
 	@Autowired
 	private VacinacaoRepository vacinacaoRepo;
+	@Autowired
+	private DoseRepository doseRepo;
 	
 	@PostMapping("/new")
-	public Vacinacao inserirVacinacao(Vacinacao vacinacao){
-		return vacinacaoRepo.save(vacinacao);
+	public Vacinacao inserirVacinacao(Vacinacao vacinacao){		
+		Vacinacao vacinacaoAux = vacinacaoRepo.save(vacinacao);
+		
+		if(vacinacao.getDoses() != null && vacinacao.getDoses().size() > 0){
+			int index = 0;
+			while(index < vacinacao.getDoses().size()){
+				vacinacao.getDoses().get(index).setVacinacao(vacinacaoAux);
+				index++;
+			}
+			
+			doseRepo.save(vacinacao.getDoses());			
+		}
+		return vacinacaoAux;
 	}
 	
 	@GetMapping
