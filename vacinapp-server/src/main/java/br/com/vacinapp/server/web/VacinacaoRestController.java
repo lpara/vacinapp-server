@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.vacinapp.server.dominio.Dose;
 import br.com.vacinapp.server.dominio.Vacinacao;
 import br.com.vacinapp.server.repository.DoseRepository;
 import br.com.vacinapp.server.repository.VacinacaoRepository;
