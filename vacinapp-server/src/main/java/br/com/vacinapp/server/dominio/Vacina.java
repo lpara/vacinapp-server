@@ -16,6 +16,9 @@ public class Vacina extends EntidadeGenerica{
 	@NotNull
 	private Boolean renovavel;
 	
+	@NotNull
+	private Integer numeroDoses;
+	
 	@Transient
 	private List<Doenca> doencas;
 
@@ -34,6 +37,14 @@ public class Vacina extends EntidadeGenerica{
 
 	public void setRenovavel(Boolean renovavel) {
 		this.renovavel = renovavel;
+	}
+
+	public Integer getNumeroDoses() {
+		return numeroDoses;
+	}
+
+	public void setNumeroDoses(Integer numeroDoses) {
+		this.numeroDoses = numeroDoses;
 	}
 
 	public List<Doenca> getDoencas() {

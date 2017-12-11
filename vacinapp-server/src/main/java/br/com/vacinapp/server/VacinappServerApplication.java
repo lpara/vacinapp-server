@@ -42,16 +42,19 @@ public class VacinappServerApplication {
 			Vacina vacinaUm = new Vacina();
 			vacinaUm.setNome("Antitetânica");
 			vacinaUm.setRenovavel(true);
+			vacinaUm.setNumeroDoses(3);
 			vacinas.add(vacinaUm);
 			
 			Vacina vacinaDois = new Vacina();
 			vacinaDois.setNome("Febre Amarela");
 			vacinaDois.setRenovavel(false);
+			vacinaDois.setNumeroDoses(1);
 			vacinas.add(vacinaDois);
 			
 			Vacina vacinaTres = new Vacina();
 			vacinaTres.setNome("Tríplice Viral");
 			vacinaTres.setRenovavel(false);
+			vacinaTres.setNumeroDoses(2);
 			vacinas.add(vacinaTres);
 			
 			vacinaRepo.save(vacinas);		
