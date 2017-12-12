@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,12 +22,12 @@ public class DoseRestController {
 	private DoseRepository doseRepo;
 	
 	@PostMapping("/new")
-	public Dose inserirDose(Dose dose){
+	public Dose inserirDose(@RequestBody Dose dose){
 		return doseRepo.save(dose);
 	}
 	
 	@PostMapping("/new/many")
-	public List<Dose> inserirDosesBatch(List<Dose> doses){
+	public List<Dose> inserirDosesBatch(@RequestBody List<Dose> doses){
 		return doseRepo.save(doses);
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class VacinacaoRestController {
 	private DoseRepository doseRepo;
 	
 	@PostMapping("/new")
-	public Vacinacao inserirVacinacao(Vacinacao vacinacao){		
+	public Vacinacao inserirVacinacao(@RequestBody Vacinacao vacinacao){		
 		Vacinacao vacinacaoAux = vacinacaoRepo.save(vacinacao);
 		
 		if(vacinacao.getDoses() != null && vacinacao.getDoses().size() > 0){
