@@ -25,18 +25,18 @@ public class VacinacaoRestController {
 	
 	@PostMapping("/new")
 	public Vacinacao inserirVacinacao(@RequestBody Vacinacao vacinacao){		
-		Vacinacao vacinacaoAux = vacinacaoRepo.save(vacinacao);
+		vacinacao = vacinacaoRepo.save(vacinacao);
 		
 		if(vacinacao.getDoses() != null && vacinacao.getDoses().size() > 0){
 			int index = 0;
 			while(index < vacinacao.getDoses().size()){
-				vacinacao.getDoses().get(index).setVacinacao(vacinacaoAux);
+				vacinacao.getDoses().get(index).setVacinacao(vacinacao);
 				index++;
 			}
 			
 			doseRepo.save(vacinacao.getDoses());			
 		}
-		return vacinacaoAux;
+		return vacinacao;
 	}
 	
 	@GetMapping
@@ -45,7 +45,7 @@ public class VacinacaoRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public Vacinacao buscarVacinacaoPorId(Long idVacinacao){
+	public Vacinacao buscarVacinacaoPorId(@PathVariable("id") Long idVacinacao){
 		return vacinacaoRepo.findOne(idVacinacao);
 	}
 	
@@ -54,3 +54,4 @@ public class VacinacaoRestController {
 		return vacinacaoRepo.buscarVacinacoesPorCarteira(idCarteira);
 	}
 }
+
